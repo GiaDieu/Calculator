@@ -1,0 +1,17 @@
+.App {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  width: 100%;
+}
+
+.wrapper{
+  width: 40%;
+  height: 60%
+}
+
+.row{
+  display: flex;
+  width: 100%;
+}
