@@ -9,7 +9,7 @@ class App extends React.Component{
           isClicked: true};
 
   onValueCal = (value) => {
-    this.setState({input: this.state.input + value});
+      this.setState({input: this.state.input + value}); 
   }
 
   onPercentValue = () => {
@@ -17,8 +17,7 @@ class App extends React.Component{
   }
 
   addNegPos = () => {
-
-    if (this.state.isClicked === false){
+    if (!this.state.isClicked){
       this.setState({input: this.state.input.replace("-",'') ,
                       isClicked : true});
 
@@ -33,17 +32,21 @@ class App extends React.Component{
   }
 
   onHandleEqual = () => {
-    this.setState({input: math.round(math.evaluate(this.state.input),2)});
+    const result = math.round(math.evaluate(this.state.input),2)
+    this.setState({input: result.toString()});
+    if (result === Infinity || result === -Infinity){
+      this.setState({input: 'Error'});
+    }
   }
 
   render(){
     return (
       <div className="App">
         <div className="wrapper">
-            <Input value={this.state.input}></Input>
+            <Input value={this.state.input} />
             <div className="row">
                 <Button val="AC" onHandleClick={this.onHandleClear}/>
-                <Button id="clicked" onHandleClick={this.addNegPos} val="+/-"/>
+                <Button onHandleClick={this.addNegPos} val="+/-"/>
                 <Button onHandleClick={this.onPercentValue} val="%"/>
                 <Button onHandleClick={this.onValueCal} val="/"/>
             </div>
